@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Course</title>
+</head>
+<div style="text-align:center; margin-top:300px; font-size: 30px;">
+    <style>
+        body{
+            background-image: url("https://assets.turbologo.ru/blog/ru/2021/10/30071021/background4.png");
+        }
+    </style>
+    <body>
+    <form th:action="@{/courses/{id}/{courseId}/update (id=${courseId},courseId=${courseId})}"
+          th:object="${group}"
+          th:method="PATCH">
+        <div>
+            <label>
+                <input th:field="*{groupName}" placeholder="Course Name">
+            </label></div>
+        <div>
+            <label>
+                <input th:field="*{dateOfStart}" placeholder="Duration">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input th:field="*{image}" placeholder="Description">
+            </label>
+        </div>
+
+        <div>
+            <input type="submit" value="update">
+        </div>
+    </form>
+    </body>
+</div>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Company</title>
+</head>
+<div style="text-align:center; margin-top:300px; font-size: 30px;">
+    <style>
+        body{
+            background-image: url("https://assets.turbologo.ru/blog/ru/2021/10/30071021/background4.png");
+        }
+    </style>
+<body>
+<form th:action="@{/companies/{id}/update (id=${company.getId()})}"
+      th:object="${company}"
+      th:method="PATCH">
+    <div>
+        <label>
+            <input th:field="*{companyName}" placeholder="Company Name">
+        </label></div>
+    <div>
+        <label>
+            <input th:field="*{locatedCountry}" placeholder="Located Country">
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="update">
+    </div>
+</form>
+</body>
+</div>
+</html>

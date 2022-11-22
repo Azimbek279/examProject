@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Instructor</title>
+</head>
+
+
+
+<div style="text-align:center; margin-top:300px; font-size: 30px;">
+    <style>
+        body{
+            background-image: url("https://assets.turbologo.ru/blog/ru/2021/10/30071021/background4.png");
+        }
+    </style>
+<body>
+<form
+        th:action="@{/instructors/{courseId}/{id}/saveUpdateInstructor(id=${instructor.id}, courseId=${courseId})}"
+        th:object="${instructor}"
+        th:method="POST"
+        style="text-align:center; margin-top:200px; font-size: 30px;">
+
+    <label>
+        <input type="text"  name="courseName" th:field="*{firstName}" placeholder="first Name">
+    </label>
+    <br><br>
+    <label>
+        <input type="text"  name="last name" th:field="*{lastName}" placeholder="last name">
+    </label>
+    <br><br>
+    <label>
+        <input type="text"  name="email" th:field="*{email}" placeholder="email">
+    </label>
+
+    <br><br>
+    <label>
+        <input type="text"  name="phone number" th:field="*{phoneNumber}" placeholder="phone number">
+    </label>
+    <br><br>
+    <label>
+        <input type="text"  name="specialization" th:field="*{specialization}" placeholder="specialization">
+    </label>
+    <br><br>
+
+    <input type="submit" value="Update">
+</form>
+</body>
+</div>
+</html>
