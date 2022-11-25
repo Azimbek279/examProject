@@ -6,6 +6,7 @@ import peaksoft.model.Group;
 import peaksoft.repository.GroupRepository;
 import peaksoft.service.GroupService;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -13,6 +14,11 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     public GroupServiceImpl(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
+    }
+
+    @Override
+    public List<Group> getAllGroupses(Long id) {
+        return groupRepository.getAllGroupses(id);
     }
 
     @Override
@@ -26,8 +32,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> getAllGroups() {
-        return groupRepository.getAllGroups();
+    public List<Group> getAllGroups(Long id) {
+        return groupRepository.getAllGroups(id);
     }
 
     @Override
@@ -38,5 +44,10 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void deleteGroup(Long id) {
         groupRepository.deleteGroup(id);
+    }
+
+    @Override
+    public void assigningGroup(Long courseId, Long groupId) throws IOException {
+        groupRepository.assigningGroup(courseId,groupId);
     }
 }

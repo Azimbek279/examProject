@@ -31,7 +31,7 @@ public class Student {
 
     private String email;
     @Column(length = 100000,name = "study_format")
-    private StudyFormat studyFormat;
+    private String studyFormat;
 
     @ManyToOne(cascade = {MERGE,DETACH,PERSIST,REFRESH},fetch = FetchType.EAGER)
     private Group group;

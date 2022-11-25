@@ -9,6 +9,7 @@ import peaksoft.repository.CourseRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Repository
@@ -19,7 +20,20 @@ public class CourseRepositoryImpl implements CourseRepository {
     private EntityManager entityManager;
 
     @Override
-    public void saveCourse(Course course,Long id) {
+    public void saveCourse(Course course,Long id) throws IOException {
+        if (course.getCourseName().toLowerCase().length()>0 &&
+                course.getDescription().toLowerCase().length()>0) {
+            for (Character i : course.getCourseName().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in course name");
+                }
+            }
+            for (Character i : course.getDescription().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)){
+                    throw new IOException("no numbers in course description");
+                }
+            }
+        }
         Company company = entityManager.find(Company.class, id);
         company.addCourse(course);
         course.setCompany(company);

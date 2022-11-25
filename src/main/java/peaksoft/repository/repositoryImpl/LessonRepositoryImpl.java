@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Repository
@@ -18,7 +19,14 @@ public class LessonRepositoryImpl implements LessonRepository {
     private EntityManager entityManager;
 
     @Override
-    public void saveLesson(Long id,Lesson lesson) {
+    public void saveLesson(Long id,Lesson lesson) throws IOException {
+        if (lesson.getLessonName().toLowerCase().length()>0) {
+            for (Character i : lesson.getLessonName().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in lesson name!");
+                }
+            }
+        }
         Course course = entityManager.find(Course.class,id);
         course.addLesson(lesson);
         lesson.setCourse(course);

@@ -5,13 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Course;
+import peaksoft.model.Group;
 import peaksoft.model.Instructor;
 import peaksoft.model.Student;
-import peaksoft.service.CompanyService;
-import peaksoft.service.CourseService;
-import peaksoft.service.InstructorService;
-import peaksoft.service.StudentService;
+import peaksoft.service.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -23,20 +22,25 @@ public class CourseController {
     private final StudentService studentService;
     private final CompanyService companyService;
 
+    private final GroupService groupService;
+
     @Autowired
-    public CourseController(CourseService courseService, InstructorService instructorService, StudentService studentService, CompanyService companyService) {
+    public CourseController(CourseService courseService, InstructorService instructorService, StudentService studentService, CompanyService companyService, GroupService groupService) {
         this.courseService = courseService;
         this.instructorService = instructorService;
         this.studentService = studentService;
         this.companyService = companyService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/courses/{id}")
     private String getAllCourses(@PathVariable Long id, Model model,
                                  @ModelAttribute("instructor") Instructor instructor,
-                                 @ModelAttribute("student") Student student) {
+                                 @ModelAttribute("student") Student student,
+                                 @ModelAttribute("group") Group group ) {
         model.addAttribute("courses", courseService.getAllCourses(id));
         model.addAttribute("companyId", id);
+        model.addAttribute("groups",groupService.getAllGroupses(id));
         List<Instructor> instructors = instructorService.getAllInstructors(id);
         model.addAttribute("instructors", instructors);
         model.addAttribute("students", studentService.getStudentById(id));
@@ -53,7 +57,7 @@ public class CourseController {
 
     @PostMapping("/{id}/saveCourse")
     private String saveCourse(@ModelAttribute("course") Course course,
-                              @PathVariable Long id) {
+                              @PathVariable Long id) throws IOException {
         courseService.saveCourse(course, id);
         System.out.println(course);
         return "redirect:/courses/courses/ " + id;
@@ -88,6 +92,15 @@ public class CourseController {
                                     @ModelAttribute("instructor") Instructor instructor) {
         instructorService.assignedInstructorToCourse(courseId,instructor.getId());
         return "redirect:/courses/courses/ " + comId;
+    }
+
+    @PostMapping("/{courseId}/assignGroup")
+    private String assignGroup(@PathVariable("courseId")Long courseId,
+                               @ModelAttribute("group") Group group) throws IOException {
+        System.out.println(group);
+        Long id = group.getId();
+        groupService.assigningGroup(courseId,id);
+        return "redirect:/groups/"+courseId;
     }
 
 }

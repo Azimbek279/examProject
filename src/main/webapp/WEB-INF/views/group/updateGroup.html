@@ -12,16 +12,16 @@
         }
     </style>
     <body>
-    <form th:action="@{/courses/{id}/{courseId}/update (id=${courseId},courseId=${courseId})}"
+    <form th:action="@{/{id}/{groupId}/saveUpdateGroup(id=${courseId},groupId=${group.id})}"
           th:object="${group}"
-          th:method="PATCH">
+          th:method="post">
         <div>
             <label>
                 <input th:field="*{groupName}" placeholder="Course Name">
             </label></div>
         <div>
             <label>
-                <input th:field="*{dateOfStart}" placeholder="Duration">
+                <input  th:field="*{dateOfStart}" placeholder="Duration">
             </label>
         </div>
 

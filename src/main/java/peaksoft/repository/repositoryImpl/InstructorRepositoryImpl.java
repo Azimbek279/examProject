@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Repository
@@ -20,7 +21,19 @@ public class InstructorRepositoryImpl implements InstructorRepository {
     private EntityManager entityManager;
 
     @Override
-    public void saveInstructor(Long id, Instructor instructor) {
+    public void saveInstructor(Long id, Instructor instructor)  throws IOException{
+        if (instructor.getFirstName().toLowerCase().length()>2 && instructor.getLastName().toLowerCase().length()>2) {
+            for (Character i : instructor.getFirstName().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in company name");
+                }
+            }
+            for (Character i : instructor.getLastName().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in company located country");
+                }
+            }
+        }
         Course course = entityManager.find(Course.class,id);
         course.addInstructor(instructor);
         instructor.setCourse(course);
@@ -38,7 +51,7 @@ public class InstructorRepositoryImpl implements InstructorRepository {
 
     @Override
     public List<Instructor> getAllInstructors(Long courseId) {
-        return entityManager.createQuery("from Instructor", Instructor.class).getResultList();
+        return entityManager.createQuery("select g from Instructor g where g.courses.id = :id", Instructor.class).setParameter("id", courseId).getResultList();
     }
 
     @Override

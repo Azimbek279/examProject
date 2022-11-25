@@ -50,46 +50,46 @@
 <table class="table table-bordered ">
     <thead class="table-dark">
     <tr class="groupMain">
-        <th scope="col">Id</th>
-        <th scope="col">Lesson Name</th>
-        <th scope="col">Course Name</th>
-        <th scope="col">Tasks</th>
+        <th scope="colgroup">Id</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">LastName</th>
+        <th scope="col">Email</th>
+        <th scope="col">PhoneNumber</th>
+        <th scope="col">StudyFormat</th>
         <th scope="col">Update</th>
         <th scope="col">Delete</th>
-
 
     </tr>
     </thead>
 
     <tbody class="table-success">
-    <tr th:each="lesson:${lessons}">
-        <td th:text="${lesson.id}"></td>
-        <td th:text="${lesson.lessonName}"></td>
-        <td th:text="${lesson.getCourse().getCourseName()}"></td>
+    <tr th:each="student: ${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.phoneNumber}"></td>
+        <td th:text="${student.studyFormat}"></td>
 
-        <td><a th:href="@{/tasks/tasks/{id}(id=${lesson.getId()})}">
-            <button style="height: 40px; width: 90px; background-color:cornflowerblue;">Tasks</button>
-        </a>
-        </td>
-
-        <td><a th:href="@{/lessons/edit/{id}(id=${lesson.getId()})}">
+        <td><a th:href="@{/updateStudent/{id}(id=${student.id})}">
             <button style="height: 40px; width: 90px; background-color:blue;">Update</button>
         </a>
         </td>
 
         <td>
-            <form th:method="DELETE" th:action="@{/lessons/{courseId}/{lessonId}/delete(courseId=${courseId},lessonId=${lesson.getId()})}">
+            <form  th:action="@{/{groupId}/{id}/deleteStudent(groupId=${groupId}, id=${student.id})}">
                 <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
             </form>
         </td>
+
     </tr>
     </tbody>
 </table>
 <br><br><br>
 
 <div style="text-align: center">
-    <a th:href="@{/lessons/{id}/addLesson(id=${courseId})}">
-        <button style="font-size: 30px;"> Add Lesson</button>
+    <a th:href="@{/{groupId}/addStudent(groupId=${groupId})}">
+        <button style="font-size: 30px;"> Add Student</button>
     </a>
 </div>
 
@@ -102,4 +102,6 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
 </body>
+
+
 </html>

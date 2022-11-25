@@ -54,15 +54,16 @@
     <thead class="table-dark">
     <tr class="courseMain">
         <th scope="col">Id</th>
-        <th scope="col">Course name</th>
-        <th scope="col">duration</th>
-        <th scope="col">description</th>
-        <th scope="col">Group</th>
-        <th scope="col">Instructor</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Description</th>
+        <th scope="col">Groups</th>
+        <th scope="col">AssGroup</th>
+        <th scope="col">Instructors</th>
         <th scope="col">Lessons</th>
         <th scope="col">Update</th>
         <th scope="col">Delete</th>
-<!--        <th scope="col">Assign</th>-->
+<!--        <th scope="col">AssInstructor</th>-->
 
     </tr>
     </thead>
@@ -74,18 +75,32 @@
         <td th:text="${course.duration}"></td>
         <td th:text="${course.description}"></td>
 
-        <td><a th:href="@{/groups/groups/{id}(id=${course.id})}">
-            <button style="height: 40px; width: 90px; background-color:#317dee;">Group</button>
+        <td><a th:href="@{/groups/{id}(id=${course.id})}">
+            <button style="height: 40px; width: 90px; background-color:#317dee;">Groups</button>
         </a>
         </td>
 
+        <td>
+            <form th:method="POST"
+                  th:action="@{/courses/{courseId}/assignGroup(courseId=${course.getId()})}">
+                <select name="instructor" class="form-select form-select-sm" aria-label=".form-select-sm example"
+                        th:object="${group}"
+                        th:field="*{id}">
+                    <option th:each="group : ${groups}"
+                            th:value="${group.id}"
+                            th:text="${group.groupName}"></option>
+                </select>
+                <input type="submit" value="submit"/>
+            </form>
+        </td>
+
         <td><a th:href="@{/instructors/instructors/{id}(id=${course.getId()})}">
-            <button style="height: 40px; width: 120px; background-color:#94ee7d;">Instructor</button>
+            <button style="height: 40px; width: 130px; background-color:#94ee7d;">Instructors</button>
         </a>
         </td>
 
         <td><a th:href="@{/lessons/lessons/{id}(id=${course.id})}">
-            <button style="height: 40px; width: 120px; background-color:#94ee7d;">Lesson</button>
+            <button style="height: 40px; width: 120px; background-color:#94ee7d;">Lessons</button>
         </a>
         </td>
 
@@ -111,6 +126,7 @@
 <!--                <input  type="submit" value="submit"/>-->
 <!--            </form>-->
 <!--        </td>-->
+
     </tr>
     </tbody>
 </table>
@@ -120,16 +136,12 @@
     <a th:href="@{/courses/{id}/addCourse(id=${companyId})}">
         <button style="font-size: 30px;"> Add Course</button>
     </a>
-
 </div>
 
 <br>
 <a class="mainButton" th:href="@{/companies}">
     <button type="button" class="btn btn-primary btn-sm"> Main </button>
 </a>
-
-<
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

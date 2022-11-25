@@ -14,24 +14,18 @@
             background-image: url("https://w-dog.ru/wallpapers/12/13/396795349342275/abstrakciya-cvet-ugol-fon-krasivo.jpg");
         }
     </style>c
-    <form action="#"
-            th:action="@{/groups/{courseId}/saveGroup(courseId=${courseId})}"
+    <form th:method="POST"
+            th:action="@{/{id}/saveGroup(id=${courseId})}"
           th:object="${group}"
-          th:method="POST"
+
           style="text-align:center; margin-top:200px; font-size: 30px;">
         <input type="hidden" name = "id" th:field="*{id}">
 
-        <label>
-            <input type="text"  name="Group Name" th:field="*{groupName}" placeholder="Group Name">
-        </label>
+        <input type="text" placeholder="Group Name" th:field="*{groupName}" name="email" id="email" required>
 
-        <label>
-            <input type="date"  name="dateOfStart" th:field="*{dateOfStart}" placeholder="Date Of Start">
-        </label>
+        <input type="text" placeholder="Data Of Start" th:field="*{dateOfStart}" name="psw" id="psw" required>
 
-        <label>
-            <input type="text" name="Image" th:field="*{image}" placeholder="image">
-        </label>
+        <input type="text" placeholder="Image" th:field="*{image}" name="psw" id="psw1" required>
         <br><br>
         <input type="submit" value="Add Group">
 

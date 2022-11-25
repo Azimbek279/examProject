@@ -51,13 +51,14 @@
   <thead class="table-dark">
   <tr class="groupMain">
     <th scope="col">Id</th>
-    <th scope="col">Instructor name</th>
-    <th scope="col">Last name</th>
+    <th scope="col">Instructor Name</th>
+    <th scope="col">Instructor Last Name</th>
     <th scope="col">Email</th>
     <th scope="col">Phone number</th>
     <th scope="col">Specialization</th>
     <th scope="col">Update</th>
     <th scope="col">Delete</th>
+    <th scope="col">AssInstructor</th>
 
   </tr>
   </thead>
@@ -71,6 +72,8 @@
     <td th:text="${instructor.phoneNumber}"></td>
     <td th:text="${instructor.specialization}"></td>
 
+
+
     <td><a th:href="@{/instructors/updateInstructor/{id}(id=${instructor.id})}">
       <button style="height: 40px; width: 90px; background-color:blue;">Update</button>
     </a>
@@ -79,6 +82,19 @@
     <td>
       <form  th:action="@{/instructors/{courseId}/{id}/deleteInstructor(id=${instructor.id},courseId=${courseId})}">
         <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
+      </form>
+    </td>
+
+    <td>
+      <form th:method="post"
+            th:action="@{/instructors/{companyId}/{courseId}/assignInstructor(companyId=${companyId},courseId=${courseId})}">
+        <select name="instructor" class="form-select form-select-sm" aria-label=".form-select-sm example"
+                th:object="${instructor}" th:field="*{id}">
+          <option th:each="instructor : ${instructors}"
+                  th:value="${instructor.id}"
+                  th:text="${instructor.firstName}"></option>
+        </select>
+        <input  type="submit" value="submit"/>
       </form>
     </td>
 

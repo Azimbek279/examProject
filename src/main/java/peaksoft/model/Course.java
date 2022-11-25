@@ -44,7 +44,7 @@ public class Course {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "courses")
     private List<Instructor> instructors;
-    //
+//
     public void addInstructor(Instructor instructor){
         if (instructors == null){
             instructors = new ArrayList<>();

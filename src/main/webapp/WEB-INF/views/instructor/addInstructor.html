@@ -22,21 +22,15 @@
           style="text-align:center; margin-top:300px; font-size: 20px;">
         <input type="hidden" name = "id" th:field="*{id}">
 
-        <label>
-            <input type="text"  name="First Name" th:field="*{firstName}" placeholder="First Name">
-        </label>
-        <label>
-            <input type="text"  name="Last Name" th:field="*{lastName}" placeholder="Last Name">
-        </label>
-        <label>
-            <input type="text"  name="Email" th:field="*{email}" placeholder="Email">
-        </label>
-        <label>
-            <input type="text"  name="Phone Number" th:field="*{phoneNumber}" placeholder="Phone Number">
-        </label>
-        <label>
-            <input type="text"  name="Specialization" th:field="*{specialization}" placeholder="Specialization">
-        </label>
+        <input type="text" placeholder="Instructor Name" th:field="*{firstName}" name="email1" id="psw4" required>
+
+        <input type="text" placeholder="Instructor Last-Name" th:field="*{lastName}" name="psw" id="psw" required>
+
+        <input type="email" placeholder="Email" th:field="*{email}" name="email" id="email" required>
+
+        <input type="tel" value="+996" placeholder="Phone Number" th:field="*{phoneNumber}" name="psw2" id="psw2" required>
+
+        <input type="text"  placeholder="Specialization" th:field="*{specialization}" name="psw2" id="psw3" required>
 
         <br><br>
         <input type="submit" value="Add Instructor">

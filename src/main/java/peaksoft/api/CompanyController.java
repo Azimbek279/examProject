@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Company;
 import peaksoft.service.CompanyService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,7 @@ public class CompanyController {
     }
 
     @PostMapping("/saveCompany")
-    private String saveCompany(@ModelAttribute("company") Company company) {
+    private String saveCompany(@ModelAttribute("company") Company company) throws IOException {
         companyService.saveCompany(company);
         return "redirect:/companies";
     }

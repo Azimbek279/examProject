@@ -7,6 +7,7 @@ import peaksoft.repository.CompanyRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Repository
@@ -17,8 +18,21 @@ public class CompanyRepositoryImpl implements CompanyRepository {
     private EntityManager entityManager;
 
     @Override
-    public void saveCompany(Company company) {
+    public void saveCompany(Company company) throws IOException{
+        if (company.getCompanyName().toLowerCase().length()>0 && company.getLocatedCountry().toLowerCase().length()>0) {
+            for (Character i : company.getCompanyName().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in company name");
+                }
+            }
+            for (Character i : company.getLocatedCountry().toLowerCase().toCharArray()) {
+                if (!Character.isLetter(i)) {
+                    throw new IOException("no numbers in company located country");
+                }
+            }
+        }
         entityManager.persist(company);
+        System.out.println("1");
     }
 
     @Override

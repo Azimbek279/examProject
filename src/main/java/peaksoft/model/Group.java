@@ -28,11 +28,11 @@ public class Group {
     private String groupName;
 
     @Column(name = "date_of_start")
-    private LocalDate dateOfStart;
+    private String dateOfStart;
 
     private String image;
 
-     @ManyToMany(cascade = {MERGE,DETACH,REFRESH},fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {MERGE,DETACH,REFRESH},fetch = FetchType.LAZY)
     private List<Course> courses;
      //
     public void addCourses(Course course){
@@ -52,8 +52,8 @@ public class Group {
         students.add(student);
     }
 
-//    @ManyToOne(cascade = {MERGE,PERSIST,DETACH,REFRESH},fetch = FetchType.EAGER)
-//    private Company company;
+    @ManyToOne(cascade = {MERGE, DETACH,PERSIST, REFRESH},fetch = FetchType.EAGER)
+    private Company company;
 
 
 }

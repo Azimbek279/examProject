@@ -6,43 +6,44 @@ import peaksoft.model.Student;
 import peaksoft.repository.StudentRepository;
 import peaksoft.service.StudentService;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
-    private final StudentRepository studentRepository;
+    private final StudentRepository service;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public StudentServiceImpl(StudentRepository service) {
+        this.service = service;
     }
 
     @Override
-    public void saveStudent(Long id, Student student) {
-        studentRepository.saveStudent(id,student);
+    public List<Student> getAllStudents(Long id) {
+        return service.getAllStudents(id);
     }
 
     @Override
-    public void updateStudent(Student student, Long id) {
-        studentRepository.updateStudent(student,id);
-    }
-
-    @Override
-    public List<Student> getAllStudents(Long groupId) {
-        return studentRepository.getAllStudents(groupId);
+    public void addStudent(Long id, Student student) throws IOException {
+        service.addStudent(id, student);
     }
 
     @Override
     public Student getStudentById(Long id) {
-        return studentRepository.getStudentById(id);
+        return service.getStudentById(id);
     }
 
     @Override
-    public void deleteStudent(Student student) {
-        studentRepository.deleteStudent(student);
+    public void updateStudent(Student student, Long id) {
+        service.updateStudent(student, id);
+    }
+
+    @Override
+    public void deleteStudent(Long id) {
+        service.deleteStudent(id);
     }
 
     @Override
     public void assignStudent(Long groupId, Long studentId) {
-        studentRepository.assignStudent(groupId,studentId);
+        service.assignStudent(groupId, studentId);
     }
 }

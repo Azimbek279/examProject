@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter
 @Setter
@@ -27,9 +30,8 @@ public class Company {
     @Column(length = 100000,name = "located_country")
     private String locatedCountry;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
+    @OneToMany(cascade = {MERGE, REFRESH, DETACH, REMOVE, PERSIST},mappedBy = "company")
     private List<Course> courses;
-
     public void addCourse(Course course){
         if (courses == null){
             courses = new ArrayList<>();
@@ -37,13 +39,19 @@ public class Company {
         courses.add(course);
     }
 
+    @OneToMany(cascade = {ALL},fetch = FetchType.LAZY,mappedBy = "company")
+    private List<Group> groups;
+
+
+
 //    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "company")
 //    private List<Group> groups;
-//
+
 //    public void addGroup(Group group){
 //        if (groups==null){
 //            groups=new ArrayList<>();
 //        }
 //        groups.add(group);
 //    }
+
 }

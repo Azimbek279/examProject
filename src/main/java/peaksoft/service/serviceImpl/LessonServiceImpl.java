@@ -6,6 +6,7 @@ import peaksoft.model.Lesson;
 import peaksoft.repository.LessonRepository;
 import peaksoft.service.LessonService;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class LessonServiceImpl implements LessonService {
@@ -16,7 +17,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public void saveLesson(Long id, Lesson lesson) {
+    public void saveLesson(Long id, Lesson lesson)throws IOException {
         lessonRepository.saveLesson(id,lesson);
     }
 

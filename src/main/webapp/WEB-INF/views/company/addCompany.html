@@ -21,15 +21,29 @@
             th:method="POST"
             style="text-align:center; margin-top:200px; font-size: 40px;">
 
-        <label>
-            <input type="text" name="companyName" th:field="*{companyName}" placeholder="Company Name">
-        </label>
-        <br><br>
-        <label>
-            <input type="text" name="locatedCountry" th:field="*{locatedCountry}" placeholder="Located Country">
-        </label>
-        <br><br>
-        <input type="submit" value="Add Company">
+
+        <div class="container">
+            <hr>
+            <input type="hidden" name="id" th:field="*{id}">
+
+            <input type="text" placeholder="Company Name" th:field="*{companyName}" name="email" id="email" required>
+
+
+            <input type="text" placeholder="Located Country" th:field="*{locatedCountry}" name="psw" id="psw" required>
+            <hr>
+            <button type="submit" >Add company</button>
+        </div>
+
+<!--        <label>-->
+
+<!--            <input type="text" name="Company Name" th:field="*{companyName}" placeholder="Company Name">-->
+<!--        </label>-->
+<!--        <br><br>-->
+<!--        <label>-->
+<!--            <input type="text" name="Located Country" th:field="*{locatedCountry}" placeholder="Located Country">-->
+<!--        </label>-->
+<!--        <br><br>-->
+<!--        <input type="submit" value="Add Company">-->
     </form>
 </div>
 </body>

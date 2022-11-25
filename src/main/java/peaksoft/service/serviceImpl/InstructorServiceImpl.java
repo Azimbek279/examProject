@@ -6,6 +6,7 @@ import peaksoft.model.Instructor;
 import peaksoft.repository.InstructorRepository;
 import peaksoft.service.InstructorService;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class InstructorServiceImpl implements InstructorService {
@@ -17,7 +18,7 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void saveInstructor(Long id, Instructor instructor) {
+    public void saveInstructor(Long id, Instructor instructor) throws IOException {
         instructorRepository.saveInstructor(id,instructor);
     }
 

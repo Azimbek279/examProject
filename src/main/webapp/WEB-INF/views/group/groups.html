@@ -57,7 +57,6 @@
         <th scope="col">Group Name</th>
         <th scope="col">Data of start</th>
         <th scope="col">image</th>
-<!--        <th scope="col">Group</th>-->
         <th scope="col">Students</th>
         <th scope="col">Update</th>
         <th scope="col">Delete</th>
@@ -78,17 +77,16 @@
 <!--        </a>-->
 <!--        </td>-->
 
-        <td><a th:href="@{/students/students/{id}(id=${student.id})}">
+        <td><a th:href="@{/students/{id}(id=${group.getId()})}">
             <button style="height: 40px; width: 120px; background-color:#94ee7d;">Students</button>
         </a>
         </td>
-
-        <td><a th:href="@{/group/edit/{id}(id=${group.getId()})}">
+        <td><a th:href="@{/updateGroup/{courseId}/{id}(id=${group.id},courseId=${courseId})}">
             <button style="height: 40px; width: 90px; background-color:aquamarine;">Update</button>
         </a>
         </td>
         <td>
-            <form  th:action="@{/group/{id}/{compId}(id=${group.getId()},compId=${courseId})}">
+            <form  th:action="@{/{courseId}/{id}/deleteGroup(id=${group.id},courseId=${courseId})}">
                 <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
             </form>
         </td>
@@ -98,8 +96,8 @@
 <br><br><br>
 
 <div style="text-align: center">
-    <a th:href="@{/groups/{id}/addGroup(id=${courseId})}">
-        <button style="font-size: 30px;"> Add Group</button>
+    <a th:href="@{/{id}/addGroup(id=${courseId})}">
+        <button style="font-size: 30px;">Add Group</button>
     </a>
 </div>
 

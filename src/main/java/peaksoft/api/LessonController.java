@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Lesson;
 import peaksoft.service.LessonService;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/lessons")
 public class LessonController {
@@ -35,11 +37,10 @@ public class LessonController {
 
     @PostMapping("/{courseId}/saveLesson")
     private String saveLesson(@ModelAttribute("lesson") Lesson lesson,
-                              @PathVariable("courseId") Long id) {
+                              @PathVariable("courseId") Long id) throws IOException {
         lessonService.saveLesson(id, lesson);
         return "redirect:/lessons/lessons/ " + id;
     }
-
 
 
     @GetMapping("/edit/{id}")
