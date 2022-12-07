@@ -43,6 +43,12 @@ public class StudentRepositoryImpl implements StudentRepository {
         group.addStudent(student);
         student.setGroup(group);
         entityManager.merge(student);
+        for (Course c:student.getGroup().getCourses()) {
+            c.getCompany().plusStudent();
+            for (Instructor i: c.getInstructors()) {
+                i.plus();
+            }
+        }
 
     }
 
@@ -65,7 +71,15 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public void deleteStudent(Long id) {
         Student student = entityManager.find(Student.class, id);
+
+        for (Course course : student.getGroup().getCourses()) {
+            course.getCompany().minusStudent();
+            for (Instructor instructor : course.getInstructors()) {
+                instructor.minus();
+            }
+        }
         student.setGroup(null);
+
         entityManager.remove(student);
     }
 

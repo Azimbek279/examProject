@@ -32,6 +32,17 @@ public class Group {
 
     private String image;
 
+    private int student;
+
+    public void plus(){
+        student++;
+    }
+
+    public void minus(){
+
+        student--;
+    }
+
     @ManyToMany(cascade = {MERGE,DETACH,REFRESH},fetch = FetchType.LAZY)
     private List<Course> courses;
      //

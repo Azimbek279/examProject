@@ -67,11 +67,10 @@ public class InstructorController {
         return "redirect:/instructors/instructors/" + courseId;
     }
 
-    @PostMapping("/{courseId}/{companyId}/assignInstructor")
+    @PostMapping("/{courseId}/assignInstructor")
     public String assignInstructor(@PathVariable("courseId") Long courseId,
-                                   @PathVariable("companyId") Long companyId,
                                    @ModelAttribute("instructor") Instructor instructor){
         instructorService.assignedInstructorToCourse(courseId, instructor.getId());
-        return "redirect:/instructors/" + companyId;
+        return "redirect:/instructors/" + courseId;
     }
 }

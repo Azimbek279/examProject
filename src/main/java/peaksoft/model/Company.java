@@ -30,6 +30,17 @@ public class Company {
     @Column(length = 100000,name = "located_country")
     private String locatedCountry;
 
+    private int count = 0;
+
+    public void plusStudent(){
+        count++;
+    }
+
+    public void minusStudent(){
+        count--;
+    }
+
+
     @OneToMany(cascade = {MERGE, REFRESH, DETACH, REMOVE, PERSIST},mappedBy = "company")
     private List<Course> courses;
     public void addCourse(Course course){

@@ -28,11 +28,10 @@ public class Student {
     private String lastName;
     @Column(length = 100000,name = "phone_number")
     private String phoneNumber;
-
+    @Column(length = 100000,name = "email",unique = true)
     private String email;
     @Column(length = 100000,name = "study_format")
     private String studyFormat;
-
-    @ManyToOne(cascade = {MERGE,DETACH,PERSIST,REFRESH},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {MERGE,DETACH,PERSIST,REFRESH},fetch = FetchType.LAZY)
     private Group group;
 }

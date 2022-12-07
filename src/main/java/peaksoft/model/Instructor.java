@@ -32,6 +32,16 @@ public class Instructor {
 
     private String specialization;
 
+    private int count = 0;
+
+    public void plus(){
+        count++;
+    }
+
+    public void minus(){
+        count--;
+    }
+
     @ManyToOne(cascade = {MERGE, DETACH, PERSIST, REFRESH}, fetch = FetchType.EAGER)
     private Course courses;
 

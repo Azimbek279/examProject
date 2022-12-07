@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import peaksoft.model.Course;
 import peaksoft.model.Group;
 import peaksoft.model.Instructor;
+import peaksoft.model.Student;
 import peaksoft.repository.InstructorRepository;
 
 import javax.persistence.Entity;
@@ -35,9 +36,17 @@ public class InstructorRepositoryImpl implements InstructorRepository {
             }
         }
         Course course = entityManager.find(Course.class,id);
+        if (course.getGroups()!=null){
+            for (Group group : course.getGroups()) {
+                for (Student student : group.getStudents()) {
+                    instructor.plus();
+                }
+            }
+        }
         course.addInstructor(instructor);
         instructor.setCourse(course);
         entityManager.merge(course);
+
     }
 
     @Override

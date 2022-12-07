@@ -32,9 +32,15 @@ public class Course {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.LAZY)
     private Company company;
 
-    @ManyToMany(cascade = {MERGE,DETACH,PERSIST,REFRESH},fetch = FetchType.LAZY,mappedBy = "courses")
+    @ManyToMany(cascade = {MERGE,DETACH,PERSIST,REFRESH,REMOVE},fetch = FetchType.LAZY,mappedBy = "courses")
     private List<Group> groups;
     //
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "courses")
+    private List<Instructor> instructors;
+
+    @OneToMany(cascade = {ALL}, fetch = FetchType.LAZY,mappedBy = "course")
+    private List<Lesson> lessons;
+
     public void addGroups(Group group){
         if (groups == null){
             groups = new ArrayList<>();
@@ -42,9 +48,6 @@ public class Course {
         groups.add(group);
     }
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "courses")
-    private List<Instructor> instructors;
-//
     public void addInstructor(Instructor instructor){
         if (instructors == null){
             instructors = new ArrayList<>();
@@ -53,8 +56,7 @@ public class Course {
     }
 
 
-    @OneToMany(cascade = {ALL}, fetch = FetchType.LAZY,mappedBy = "course")
-    private List<Lesson> lessons;
+
     //
     public void addLesson(Lesson lesson){
         if (lessons == null){
@@ -62,6 +64,7 @@ public class Course {
         }
         lessons.add(lesson);
     }
+
 
 
 
